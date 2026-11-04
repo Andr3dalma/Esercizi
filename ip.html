@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calcolo IP</title>
+</head>
+<body>
+
+<h1>Calcolo IP e Subnet Mask</h1>
+
+IP:
+<input type="number" id="ip1" value="192"> .
+<input type="number" id="ip2" value="168"> .
+<input type="number" id="ip3" value="1"> .
+<input type="number" id="ip4" value="10">
+
+<br><br>
+
+Prefix Length:
+<input type="number" id="pl" value="24" min="0" max="32">
+
+<br><br>
+
+<button onclick="calcola()">Calcola</button>
+
+<p id="ipBinario"></p>
+<p id="maschera"></p>
+<p id="maskBinario"></p>
+
+<script>
+function calcola() {
+
+    let ip1 = document.getElementById("ip1").valueAsNumber;
+    let ip2 = document.getElementById("ip2").valueAsNumber;
+    let ip3 = document.getElementById("ip3").valueAsNumber;
+    let ip4 = document.getElementById("ip4").valueAsNumber;
+    let pl = document.getElementById("pl").valueAsNumber;
+
+    // Converto i quattro numeri IP in binario
+    
+    let numeri = [ip1, ip2, ip3, ip4];
+
+    for (let j = 0; j < 4; j++) {
+        let n = numeri[j];
+        let b = "";
+
+        for (let i = 0; i < 8; i++) {
+            let resto = n % 2;
+            b = resto + b;
+            n = Math.floor(n / 2);
+        }
+
+        ipBin = ipBin + b;
+
+        if (j < 3) {
+            ipBin = ipBin + " . ";
+        }
+    }
+
+    document.getElementById("ipBinario").innerHTML =
+        "IP in binario: " + ipBin;
+        
+    let bit = "";
+
+    for (let i = 0; i < 32; i++) {
+        if (i < pl) {
+            bit = bit + "1";
+        } else {
+            bit = bit + "0";
+        }
+    }
+
+    // Converto la maschera in decimale
+    let m1 = parseInt(bit.substring(0, 8), 2);
+    let m2 = parseInt(bit.substring(8, 16), 2);
+    let m3 = parseInt(bit.substring(16, 24), 2);
+    let m4 = parseInt(bit.substring(24, 32), 2);
+
+    document.getElementById("maschera").innerHTML =
+        "Subnet mask: " + m1 + "." + m2 + "." + m3 + "." + m4;
+
+
+    document.getElementById("maskBinario").innerHTML =
+        "Mask binaria: " +
+
+        bit.substring(0, 8) + " . " +
+        bit.substring(8, 16) + " . " +
+        bit.substring(16, 24) + " . " +
+        bit.substring(24, 32);
+}
+</script>
+
+</body>
+</html>
