@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Convertitore Binario</title>
+</head>
+<body>
+
+    <h2>Conversione da decimale a binario</h2>
+
+    <label for="numero">Inserisci un numero intero (0-255):</label>
+    <input type="number" id="numero" min="0" max="255">
+
+    <button onclick="converti()">Converti</button>
+
+    <p id="risultato"></p>
+
+    <script>
+        function converti() {
+            let numero = parseInt(document.getElementById("numero").value);
+
+            if (isNaN(numero) || numero < 0 || numero > 255) {
+                document.getElementById("risultato").innerHTML =
+                    "Inserisci un numero intero tra 0 e 255.";
+                return;
+            }
+
+            let binario = numero.toString(2).padStart(8, '0');
+
+            document.getElementById("risultato").innerHTML =
+                "Il numero " + numero + " in binario è: <b>" + binario + "</b>";
+        }
+    </script>
+
+</body>
+</html>
