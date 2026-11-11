@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Inserimento dati personali</h2>
+
+    <form id="miaMaschera">
+        Nome:
+        <input type="text" id="nome">
+        <br><br>
+
+        Cognome:
+        <input type="text" id="cognome">
+        <br><br>
+
+        Età:
+        <input type="number" id="eta">
+        <br><br>
+
+        Sesso:
+        <input type="radio" name="sesso" value="Maschio"> Maschio
+        <input type="radio" name="sesso" value="Femmina"> Femmina
+        <br><br>
+
+        Indirizzo:
+        <input type="text" id="indirizzo">
+        <br><br>
+
+        Città:
+        <input type="text" id="citta">
+        <br><br>
+
+        Provincia:
+        <select id="provincia">
+            <option value="">Seleziona provincia</option>
+            <option value="Milano">Milano</option>
+            <option value="Roma">Roma</option>
+            <option value="Torino">Torino</option>
+            <option value="Napoli">Napoli</option>
+            <option value="Bergamo">Bergamo</option>
+            <option value="Brescia">Brescia</option>
+            <option value="Como">Como</option>
+            <option value="Varese">Varese</option>
+        </select>
+        <br><br>
+
+        Sport praticati:
+        <br>
+        <input type="checkbox" name="sport" value="Calcio"> Calcio
+        <input type="checkbox" name="sport" value="Basket"> Basket
+        <input type="checkbox" name="sport" value="Nuoto"> Nuoto
+        <input type="checkbox" name="sport" value="Tennis"> Tennis
+        <input type="checkbox" name="sport" value="Pallavolo"> Pallavolo
+        <br><br>
+
+        Commenti:
+        <br>
+        <textarea id="commenti" rows="5" cols="40"></textarea>
+        <br><br>
+
+        <input type="button" value="Visualizza dati"
+               onclick="visualizzaDati()">
+
+        <input type="reset" value="Cancella">
+    </form>
+
+    <br>
+
+    <h2>Dati inseriti</h2>
+
+    <div id="risultato"></div>
+
+    <script>
+        function visualizzaDati() {
+            let nome = document.getElementById("nome").value;
+            let cognome = document.getElementById("cognome").value;
+            let eta = document.getElementById("eta").value;
+            let indirizzo = document.getElementById("indirizzo").value;
+            let citta = document.getElementById("citta").value;
+            let provincia = document.getElementById("provincia").value;
+            let commenti = document.getElementById("commenti").value;
+
+            let sesso = document.getElementsByName("sesso");
+            let sessoScelto = "";
+
+            for (let i = 0; i < sesso.length; i++) {
+                if (sesso[i].checked) {
+                    sessoScelto = sesso[i].value;
+                }
+            }
+
+            let sport = document.getElementsByName("sport");
+            let sportScelti = "";
+
+            for (let i = 0; i < sport.length; i++) {
+                if (sport[i].checked) {
+                    sportScelti = sportScelti + sport[i].value + " ";
+                }
+            }
+
+            let tabella = "<table border='1'>";
+
+            tabella += "<tr><th>Campo</th><th>Valore</th></tr>";
+
+            tabella += "<tr><td>Nome</td><td>" + nome + "</td></tr>";
+            tabella += "<tr><td>Cognome</td><td>" + cognome + "</td></tr>";
+            tabella += "<tr><td>Età</td><td>" + eta + "</td></tr>";
+            tabella += "<tr><td>Sesso</td><td>" + sessoScelto + "</td></tr>";
+            tabella += "<tr><td>Indirizzo</td><td>" + indirizzo + "</td></tr>";
+            tabella += "<tr><td>Città</td><td>" + citta + "</td></tr>";
+            tabella += "<tr><td>Provincia</td><td>" + provincia + "</td></tr>";
+            tabella += "<tr><td>Sport praticati</td><td>" + sportScelti + "</td></tr>";
+            tabella += "<tr><td>Commenti</td><td>" + commenti + "</td></tr>";
+
+            tabella += "</table>";
+
+            document.getElementById("risultato").innerHTML = tabella;
+        }
+    </script>
+</body>
+</html>
